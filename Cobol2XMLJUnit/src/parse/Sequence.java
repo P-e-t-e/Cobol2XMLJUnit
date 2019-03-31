@@ -1,5 +1,5 @@
 /*
- * @(#)Sequence.java	 1.0.0
+` * @(#)Sequence.java	 1.0.0
  *
  * Copyright (c) 1999 Steven J. Metsker
  *

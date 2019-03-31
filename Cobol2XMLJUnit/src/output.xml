@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cobol>
+<call>
+<path>test_prog</path>
+<using>externalprog</using>
+</call>
+<call>
+<path>test_prog1</path>
+<using>externalprog</using>
+</call>
+</cobol>

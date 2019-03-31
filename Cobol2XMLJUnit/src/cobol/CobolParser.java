@@ -26,6 +26,7 @@ import parse.Parser;
 import parse.Sequence;
 import parse.tokens.CaselessLiteral;
 import parse.tokens.Num;
+import parse.tokens.QuotedString;
 import parse.tokens.Symbol;
 import parse.tokens.Tokenizer;
 import parse.tokens.Word;
@@ -47,6 +48,8 @@ public class CobolParser {
 		Symbol fullstop = new Symbol('.');
 		fullstop.discard();
 		
+		a.add( externalCall() );
+		
 		a.add( ProgramID() );
 		
 		a.add( DivisionName() );
@@ -57,6 +60,22 @@ public class CobolParser {
 		
 		a.add(new Empty());
 		return a;
+	}
+
+
+	/**
+	 * Return a parser that will recognise external calls
+	 * "call" <Program name>
+	 * @return
+	 */
+	private Parser externalCall() {
+		Sequence s = new Sequence();
+		s.add(new CaselessLiteral("call"));
+		s.add(new QuotedString());
+		s.add(new CaselessLiteral("using"));
+		s.add(new Word());
+		s.setAssembler(new ExternalCallAssembler());
+		return s;
 	}
 
 
@@ -101,7 +120,6 @@ public class CobolParser {
 		s.add(new Word().setAssembler(new SectionNameAssembler()));
 		s.add(new CaselessLiteral("section") );
 		s.add(new Symbol('.').discard());	
-
 		return s;
 	}
 	
