@@ -30,6 +30,8 @@ public class Cobol implements PubliclyCloneable {
 	protected int dayDateWritten = 0;
 	protected String monthDateWritten;
 	protected int yearDateWritten = 0;
+	private String callref;
+	private String callUsing;
 
 	
 	/**
@@ -219,5 +221,19 @@ public class Cobol implements PubliclyCloneable {
 		buf.append(sectionName);
 		
 		return buf.toString();
+	}
+
+	public String getCallref() {
+		return callref;
+	}
+	public void setCallref(String callref) {
+		this.callref = callref;
+	}
+	public void setCallUsing(String sval) {
+		// TODO Auto-generated method stub
+		this.callUsing = sval;
+	}
+	public String getCallUsing() {
+		return this.callUsing;
 	}
 }

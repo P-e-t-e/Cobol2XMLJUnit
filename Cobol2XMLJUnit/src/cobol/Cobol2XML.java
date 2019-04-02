@@ -23,6 +23,9 @@ package cobol;
 
 import XMLWriter.*;
 import java.io.*;
+
+import javax.swing.JFileChooser;
+
 import parse.*;
 import parse.tokens.*;
 
@@ -58,7 +61,10 @@ public class Cobol2XML {
 		 * A rather crude approach is to hard code the filename for the cobol source file, like this
 		 * InputStream is = new FileInputStream("C:\\Users\\sgs442\\eclipse-workspace\\CobolParser1\\base.cbl");
 		 */
-		InputStream is = new FileInputStream(args[0]);
+		JFileChooser chooser = new JFileChooser();
+		System.out.println("Choose an input file");
+		chooser.showOpenDialog(null);
+		InputStream is = new FileInputStream(chooser.getSelectedFile());
 		BufferedReader r = 	new BufferedReader(new InputStreamReader(is));
 
 		Tokenizer t = CobolParser.tokenizer();
@@ -81,7 +87,9 @@ public class Cobol2XML {
 				xmlp.addElements(c); 
 			
 		}
-		xmlp.writeFile(args[1]);
+		System.out.println("Choose an output file");
+		chooser.showOpenDialog(null);
+		xmlp.writeFile(chooser.getSelectedFile().getPath());
 		r.close();
 	}
 
