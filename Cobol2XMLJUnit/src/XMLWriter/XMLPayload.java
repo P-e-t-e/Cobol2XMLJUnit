@@ -60,6 +60,20 @@ public class XMLPayload {
 	public void addElements(Cobol c) {
 		
 		/*
+		 * add externalCall element
+		 */
+		String callUsing = c.getCallUsing();
+		String externalCall = c.getCallref();
+		if(externalCall != null) {
+			this.addExternalCallElement(externalCall, callUsing);
+		} else {
+			
+		}
+		
+		
+		
+		
+		/*
 		 *  add sectionName element
 		 */		
 		String sectionName = c.getSectionName();
@@ -123,7 +137,27 @@ public class XMLPayload {
 	}
 	
 
- 	void addProgram_IDElement(String stringElement) {
+ 	void addExternalCallElement(String externalCall, String callUsing) {
+ 		if(externalCall!=null) {
+ 			Element cobolname = doc.createElement("call");
+ 			Element programName = doc.createElement("path");
+ 			
+ 			cobolname.appendChild(programName);
+ 			
+ 			programName.appendChild(doc.createTextNode(externalCall.replaceAll("\"", "")));
+
+ 
+ 			if(callUsing!=null) {
+ 				Element usingName = doc.createElement("using");
+ 				cobolname.appendChild(usingName);
+ 				usingName.appendChild(doc.createTextNode(callUsing));
+ 			}
+			rootElement.appendChild(cobolname);
+ 		}
+	}
+
+
+	void addProgram_IDElement(String stringElement) {
 		//  Program ID element
 		
 		if(stringElement != null) {
@@ -209,5 +243,6 @@ public class XMLPayload {
 	         e.printStackTrace();
 	     }
 	}
+	
 
 }
