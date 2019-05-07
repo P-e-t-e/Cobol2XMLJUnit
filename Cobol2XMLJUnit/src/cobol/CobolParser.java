@@ -58,6 +58,8 @@ public class CobolParser {
 		
 		a.add( DateWritten() );
 		
+		a.add( commentLine() );
+		
 		a.add(new Empty());
 		return a;
 	}
@@ -143,6 +145,21 @@ public class CobolParser {
 		s.add(new Symbol('.').discard());
 		s.setAssembler(new DateAssembler());
 		return s;
+	}
+
+	private Parser commentLine() {
+        Sequence s = new Sequence();
+        s.add(new Symbol("*").discard());
+        s.add(new Symbol("*").discard());
+        s.add(new Symbol("*").discard());
+        s.add(new Symbol("-").discard());
+        s.add(new Symbol("-").discard());
+        s.add(new Symbol("-").discard());
+        s.add(new Word().setAssembler(new commentLineAssembler()));
+      //s.setAssembler(new commentLineAssembler());
+		return s;
+        
+		
 	}
 
 

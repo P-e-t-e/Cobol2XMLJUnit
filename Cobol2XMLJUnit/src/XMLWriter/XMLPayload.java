@@ -37,6 +37,7 @@ import org.w3c.dom.Element;
 public class XMLPayload {
 	Document doc;
 	Element rootElement;
+	String stringElement;
 	
 	public XMLPayload() {
 		try {
@@ -68,6 +69,14 @@ public class XMLPayload {
 			this.addExternalCallElement(externalCall, callUsing);
 		} else {
 			
+		}
+		
+		String commentLine = c.getCommentLine();
+		if (commentLine != null) {
+		this.addCommentLineElement( commentLine );
+		//System.out.println("Got Section");
+		} else {
+		//System.out.println("Comment Line: Null");
 		}
 		
 		
@@ -137,7 +146,18 @@ public class XMLPayload {
 	}
 	
 
- 	void addExternalCallElement(String externalCall, String callUsing) {
+ 	private void addCommentLineElement(String stringElement) {
+		
+ 		if(stringElement != null) {
+			Element cobolname = doc.createElement("comment");
+			cobolname.appendChild(doc.createTextNode(stringElement));
+			rootElement.appendChild(cobolname);
+		
+	}
+ 	}
+
+
+	void addExternalCallElement(String externalCall, String callUsing) {
  		if(externalCall!=null) {
  			Element cobolname = doc.createElement("call");
  			Element programName = doc.createElement("path");
@@ -218,6 +238,7 @@ public class XMLPayload {
 			rootElement.appendChild(cobolname);
 		}
 	}
+	
 	
 	public void writeFile(String filename) {
 		try {

@@ -32,8 +32,13 @@ public class Cobol implements PubliclyCloneable {
 	protected int yearDateWritten = 0;
 	private String callref;
 	private String callUsing;
+	protected String commentLine;
 
 	
+	public String getCommentLine() {
+		return commentLine;
+		
+	}
 	/**
 	 * Return a copy of this object.
 	 *
@@ -235,5 +240,9 @@ public class Cobol implements PubliclyCloneable {
 	}
 	public String getCallUsing() {
 		return this.callUsing;
+	}
+	public void setCommentLine(String commentLine) {
+		this.commentLine = commentLine;
+		
 	}
 }

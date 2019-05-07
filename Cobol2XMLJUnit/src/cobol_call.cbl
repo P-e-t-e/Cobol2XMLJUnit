@@ -1,2 +1,4 @@
-call "test_prog" using externalprog
-call "test_prog1" using externalprog, bleh
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cobol>
+<comment>HELLO </comment>
+</cobol>
